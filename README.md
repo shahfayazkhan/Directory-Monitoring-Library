@@ -8,4 +8,43 @@ Creating a Watch Service and Registering for Directory
     String path = "root_path";
     DataFiles dataFiles = new DataFiles(path);
   
-# 2) Watch Dirctory only For Inside one Folder data Changed
+# 2) Watch Directory only For Inside one Folder data Changed
+    dataFiles.setOnDataSetChangeListener(new addOnDataSetChangeListener() {
+        @Override
+        public void onDataChanged(File file, String name) {
+            System.out.println("Change : "+name);
+        }
+
+        @Override
+        public void onDataFailed(Exception e) {
+            System.out.println("The Error Failed : "+e);
+        }
+    });
+    
+ # 3) Watch Directory to Detect new File Added for one Folder
+    dataFiles.setOnDataAddChangeListener(new addOnDataAddChangeListener() {
+        @Override
+        public void onDataAdded(File file, String name) {
+            System.out.println("Added : "+name);
+        }
+
+        @Override
+        public void onDataAddedFailed(Exception e) {
+            System.out.println("Added Failed : "+e.getMessage());
+        }
+    });
+    
+# 4) Watch Directory to Detect File Remove for one Folder
+    dataFiles.setOnDataRemoveChangeListener(new addOnDataRemoveChangeListener() {
+        @Override
+        public void onDataRemoved(File file, String name) {
+            System.out.println("Removed File : "+name);
+        }
+
+        @Override
+        public void onDataRemovedFailed(Exception e) {
+            System.out.println(e);
+        }
+    });
+
+
